@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+            <header class="header">
+                <div class="header_container container">
+                    <nav class="logo">
+                        <img class="img-item" src="./img/animal_logo.png" alt="">
+                        <div class="text-item">My AniMals</div>
+                    </nav>
+                </div>
+            </header>
+            <main>
+                <div class="main_container container">
+                    <div class="main-part">
+                        <div class="left-side">
+                            <div class="create-animals">
+                                <form>
+                                    <h2 class="paragraph">Create animal card:</h2>
+                                    <div class="forms">
+                                        <label for="name-input">Name</label>
+                                        <input tabindex="1" id="name-input" type="text" placeholder="Cat or dog">
+                                    </div>
+                                    <div class="forms">
+                                        <label for="weight-input">Weight</label>
+                                        <input tabindex="2" id="weight-input" type="number" placeholder="Type weight">
+                                    </div>
+                                    <div class="forms">
+                                        <label for="description-input">Description</label><br>
+                                        <textarea tabindex="3" id="description-input" cols="30" rows="5"></textarea>
+                                    </div>
+                                    <button class="create-btn">Create</button>
+                                </form>
+                            </div>
+                            <div class="find-animals">
+                                <form>
+                                    <h2 class="paragraph">Find animals by name:</h2>
+                                    <div class="forms">
+                                        <label for="">Find</label>
+                                        <input tabindex="4" id="find" placeholder="Find by name" type="text">
+                                    </div>
+                                    <button type="button" class="button">Find</button>
+                                    <button type="button" class="button-red">Cancel</button>
+                                </form>
+                            </div>
+                            <div class="sort-by-weight">
+                                <h2 class="paragraph">Sort by weight</h2>
+                                <button id="sort-by-purity-asc-button" class="button-green" type="submit">Sort</button>
+                            </div>
+                            <div class="count-total-weight">
+                                <h2 id="total-paragraph" class="paragraph">Total weight: <p class="total-price-container"></p></h2>
+                                <button class="count-button">Total</button>
+                            </div>
+                        </div>
+                        <div class="right-side">
+                            <ul id="animals-container" class="animals-container"></ul>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script type="module" src="./js/index.js"></script>
+</body>
+</html>
