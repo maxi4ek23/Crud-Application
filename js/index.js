@@ -1,3 +1,6 @@
+import { getAllAnimals, postAnimal, editAnimal, deleteAnimal } from "./api.js";
+
+
 const createAnimalButton = document.getElementById('create_animal');
 const myAnimalButton = document.getElementById('my_animal');
 const menuItems = document.querySelectorAll('.menu__link');
@@ -22,7 +25,7 @@ const countButton = document.querySelector('.count_button');
 const totalWeightContainer = document.querySelector('.total-price-container');
 const sortButton = document.getElementById('sort');
 
-const animalTemplate = ({ id, name, description, dailyExpense, animalType}) => `
+const animalTemplate = ({ id, name, description, daily_expense, anim_type}) => `
 <li class="animal_item">
     <img class="animal_item__img" src="./img/animals.jpg">
     <div class="animal_item__container">
@@ -33,16 +36,20 @@ const animalTemplate = ({ id, name, description, dailyExpense, animalType}) => `
         </div>
         <div class="animal_item__item">
             <h5 class="animal__characteristic">Daily expense:</h5>
-            <p class="animal__text">${dailyExpense}</p>
+            <p class="animal__text">${daily_expense}</p>
         </div>
         <div class="animal_item__item">
             <h5 class="animal__characteristic">Animal type:</h5>
-            <p class="animal__text">${animalType}</p>
+            <p class="animal__text">${anim_type}</p>
         </div>
         <div class="edit_button__wrapper">
             <button id="${id}" class="edit_button">
                 Edit
             </button>
+            <button id="${id}" class="remove_button">
+                Remove
+            </button>
+
         </div>
     </div>
 </li>
@@ -55,10 +62,10 @@ const renderItems = (items) => {
     }
 };
 
-const addAnimalsToPage = ({id, name, description, dailyExpense, animalType}) => {
+const addAnimalsToPage = ({id, name, description, daily_expense, anim_type}) => {
     animalsContainer.insertAdjacentHTML(
         "afterbegin",
-        animalTemplate({id, name, description, dailyExpense, animalType})
+        animalTemplate({id, name, description, daily_expense, anim_type})
     );
 };
 
@@ -66,8 +73,8 @@ const getInputValues = () => {
     return {
         name: nameInput.value,
         description: descriptionInput.value,
-        dailyExpense: expenseInput.value,
-        animalType: animalTypeInput.value,
+        daily_expense: expenseInput.value,
+        anim_type: animalTypeInput.value,
     }
 };
 
@@ -83,19 +90,27 @@ let currentAnimals = [];
 let id = 1;
 let currentId;
 
-const addAnimals = ({name, description, dailyExpense, animalType}) => {
+/*const addAnimals = ({name, description, daily_expense, anim_type}) => {
     const newAnimal = {
         id: `id_for_edit_${id}`,
         name: name,
         description: description,
-        dailyExpense: dailyExpense, 
-        animalType: animalType,
+        daily_expense: daily_expense, 
+        anim_type: anim_type,
     };
     id += 1;
     animals.push(newAnimal);
     currentAnimals = animals;
     addAnimalsToPage(newAnimal);
-}
+}*/
+
+const refetchAllAnimals = async () => {
+    const allAnimals = await getAllAnimals();
+    animals = allAnimals; 
+    currentAnimals = allAnimals;
+
+    renderItems(animals);
+};
 
 /*const openMainPage = () => {
     createWindowPage.classList.remove('active');
@@ -165,14 +180,14 @@ myAnimalButton.addEventListener('click' , (event) => {
 submitButton.addEventListener('click', (event) => {
     if(validation()) {
         event.preventDefault();
-        const {name, description, dailyExpense, animalType} = getInputValues();
+        const {name, description, daily_expense, anim_type} = getInputValues();
         clearInputs();
-        addAnimals({
+        postAnimal({
             name: name,
             description: description,
-            dailyExpense: dailyExpense, 
-            animalType: animalType,
-        });
+            daily_expense: daily_expense, 
+            anim_type: anim_type,
+        }).then(refetchAllAnimals);
         switchPage();
     //openMainPage();
     } else {
@@ -183,18 +198,11 @@ submitButton.addEventListener('click', (event) => {
 editButton.addEventListener('click', (event) => {
     if(validation()) {
         event.preventDefault();
-    const {name, description, dailyExpense, animalType} = getInputValues();
-    clearInputs();
-    let indexCurrentAnimal = animals.map(animal => animal.id).indexOf(currentId);
-    animals[indexCurrentAnimal].name = name;
-    animals[indexCurrentAnimal].description = description;
-    animals[indexCurrentAnimal].dailyExpense = dailyExpense;
-    animals[indexCurrentAnimal].animalType = animalType;
-    renderItems(currentAnimals);
-    switchPage();
-    //openMainPage();
-    switchCreateToEdit();
-    console.log(indexCurrentAnimal);
+        editAnimal(currentId, getInputValues()).then(refetchAllAnimals(animals));
+        clearInputs();
+        switchPage();
+        //openMainPage();
+        switchCreateToEdit();
     } else {
         getEror();
     }
@@ -223,14 +231,21 @@ animalsContainer.addEventListener('click', (event) => {
     }
 })
 
+animalsContainer.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (event.target.closest('.remove_button')) {
+        deleteAnimal(event.target.getAttribute('id')).then(refetchAllAnimals);
+    }
+})
+
 const returnEditParametrs = (id) => {
     const animalsContainerItem = animals.find((animal) => {
-        return animal.id === id;
+        return animal.id == id;
     });
     nameInput.value = animalsContainerItem.name;
     descriptionInput.value = animalsContainerItem.description;
-    expenseInput.value = animalsContainerItem.dailyExpense;
-    animalTypeInput.value = animalsContainerItem.animalType;
+    expenseInput.value = animalsContainerItem.daily_expense;
+    animalTypeInput.value = animalsContainerItem.anim_type;
 };
 
 createWindowPage.addEventListener('click', (event) => {
@@ -261,14 +276,14 @@ countButton.addEventListener("click", () => {
 
 const countFunc = (items) => {
     const total = items.reduce((previousValue, item) => {
-        return previousValue + Number(item.dailyExpense);
+        return previousValue + Number(item.daily_expense);
     }, 0)
     totalWeightContainer.innerHTML = total + "$";
 };
 
 sortButton.addEventListener("click", (event) => {
     event.preventDefault();
-    const sortedAnimalsByExpense = currentAnimals.sort((firstAnimal, secondAnimal) => secondAnimal.dailyExpense - firstAnimal.dailyExpense);
+    const sortedAnimalsByExpense = currentAnimals.sort((firstAnimal, secondAnimal) => secondAnimal.daily_expense - firstAnimal.daily_expense);
     renderItems(sortedAnimalsByExpense);
 });
 
@@ -279,7 +294,6 @@ const validation = () => {
         return false;
     }
     else {
-        console.log(nameInput.value, descriptionInput.value, expenseInput.value, animalTypeInput.value)
         return true;
     }
 };
@@ -287,3 +301,8 @@ const validation = () => {
 const getEror = () => {
     erorWindow.classList.remove('hidden');
 }
+
+//  main code
+
+refetchAllAnimals()
+

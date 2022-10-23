@@ -202,6 +202,7 @@ h4 {
 
 .edit_button__wrapper {
     margin-top: 2.5vh;
+    display: flex;
 }
 
 .edit_button{
@@ -210,6 +211,15 @@ h4 {
     background-color: rgb(76, 196, 252);
     color: white;
     border-radius: 4px;
+}
+
+.remove_button{
+    width: 5vw;
+    height: 3vh;
+    background-color: rgb(252, 76, 76);
+    color: white;
+    border-radius: 4px;
+    margin-left: 4px;
 }
 
 .animal_item__img {
