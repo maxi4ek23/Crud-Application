@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <nav class="header__nav">
+                    <div class="logo">
+                        My Zoo
+                    </div>
+                    <ul class="header__menu menu">
+                        <li class="menu__item">
+                            <button id="my_animal" class="menu__link active_menu__link">My Animals</button>
+                        </li>
+                        <li class="menu__item">
+                            <button id="create_animal" class="menu__link">Create Animal</button>
+                        </li>
+                    </ul>
+                </nav>
+                <form action="#" class="search_form">
+                    <div class="search_input__container">
+                        <input class="search_input" type="text" placeholder="Type something...">
+                    </div>
+                    <div class="search-buttons">
+                        <button id="search" class="search-button search">Search</button>
+                        <button id="clear" class="search-button clear">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </header>
+        <main id="main" class="content__page active">
+            <div class="main__container">
+                <div class="left_side">
+                    <div class="left_side__container">
+                        <h1 class="title">Manage animals</h1>
+                        <div class="sort__container">
+                            <h2 class="sort__title">Sort by the most expensive animals</h2>
+                            <button id="sort" class="sort__input">S</button>
+                        </div>
+                        <div class="total__container">
+                            <h2 class="total__title">Count total daily expenses:</h2>
+                            <button class="count_button">Count</button>
+                            <div class="total__output">
+                                <h3 class="expenses">Total expenses:</h3>
+                                <p class="total-price-container"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right_side">
+                    <ul id="animals-container">
+                        
+                    </ul>
+                </div>
+            </div>
+        </main>
+        <main id="create__page" class="content__page">
+            <div class="create_page__container">
+                <h2 id="create__title" class="valid_title active">Create animal</h2>
+                <h2 id="edit__title" class="valid_title">Edit animal</h2>
+                <form action="#" class="create_animal__form">
+                    <div class="input__wrapper">
+                        <label for="" class="form_lable">Name</label>
+                        <input tabindex="1" placeholder="Name..." type="text" id="name_input" class="form_input">
+                    </div>
+                    <div class="input__wrapper">
+                        <label for="" class="form_lable">Description</label>
+                        <textarea tabindex="2" class="description_input" id="description_input" cols="60" rows="5"></textarea>
+                    </div>
+                    <div class="input__wrapper">
+                        <label for="" class="form_lable">Daily expense ($)</label>
+                        <input tabindex="3" value="5" placeholder="" type="number" id="expense_input" class="form_input">
+                    </div>
+                    <div class="input__wrapper">
+                        <label for="" class="form_lable">Animal Type</label>
+                        <select tabindex="4" id="animal_type_input" class="form_input">
+                            <option>Select Type</option>
+                            <option>Mammal</option>
+                            <option>Reptile</option>
+                            <option>Fish</option>
+                            <option>Cloven-footed</option>
+                        </select>
+                    </div>
+                    <button id="submit_button" class="valid_button active">Submit</button>
+                    <button id="edit_button" class="valid_button">Edit</button>
+            </div>
+            <div id="alert" class="alert hidden">
+                <div id="alert__block" class="alert__block">
+                    <p class="alert__text">
+                        <span>Oh snap!</span> Change a few things up and try submitting again.
+                    </p>
+                    <img class="alert__img" src="./img/crest.png" alt="">
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="./js/index.js"></script>
+</body>
+</html>

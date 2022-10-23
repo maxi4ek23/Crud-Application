@@ -1,0 +1,285 @@
+@import "./reset.css";
+@import "./header.css";
+
+#main {
+    margin-top: 3vh;
+}
+
+.main__container {
+    width: 70vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left_side {
+    border-right: 2px solid rgb(206, 205, 205);
+    height: 90.5vh;
+}
+
+.left_side__container {
+    width: 15vw;
+}
+
+.title {
+    text-align: center;
+    font-size: 1.2vw;
+    margin-bottom: 4vh;
+    color: rgb(99, 98, 98);
+}
+
+.sort__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding-bottom: 3vh;
+    width: 95%;
+    border-bottom: 2px solid rgb(206, 205, 205);
+}
+
+.sort__title {
+    width: 9vw;
+    font-weight: 700;
+    font-weight: 0.8vw;
+    line-height: 135%;
+    color: rgb(99, 98, 98);
+}
+
+.sort__input {
+    width: 1.25vw;
+    height: 2.5vh;
+    background-color: rgb(0, 132, 255);
+    color: white;
+}
+
+.total__container {
+    margin: 0 auto;
+    margin-top: 3vh;
+}
+
+.total__title {
+    font-weight: 700;
+    font-weight: 0.8vw;
+    line-height: 135%;
+    color: rgb(99, 98, 98);
+}
+
+.count_button {
+    display: block;
+    margin: 2vh auto 0;
+    width: 7vw;
+    height: 3.5vh;
+    background-color: rgb(0, 132, 255);
+    color: white;
+    border-radius: 5px;
+}
+
+.total__output {
+    margin-top: 2vh;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.expenses {
+    font-weight: 400;
+}
+
+#create__page {
+    margin-top: 5vh;
+}
+
+.create_page__container {
+    width: 25vw;
+    margin: 0 auto;
+    height: 75vh;
+}
+
+#create__title, #edit__title {
+    text-align: center;
+    font-size: 3vw;
+    font-weight: 700;
+    margin-bottom: 8vh;
+}
+
+.valid_title{
+    display: none;
+}
+
+.input__wrapper {
+    margin-bottom: 3vh;
+}
+
+.form_lable {
+    font-weight: 400;
+}
+
+.description_input {
+    display: block;
+    margin-top: 1.5vh;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.form_input {
+    display: block;
+    margin-top: 1.5vh;
+    border: 1px solid gray;
+    width: 23.5vw;
+}
+
+#name_input {
+    height: 4.5vh;
+    border-radius: 7px;
+    padding-left: 0.4vw;
+}
+
+#expense_input {
+    height: 3vh;
+    border-radius: 6px;
+    padding-left: 0.4vw;
+}
+
+#animal_type_input {
+    height: 4.5vh;
+    border-radius: 7px;
+    padding-left: 0.55vw;
+}
+
+#submit_button, #edit_button {
+    width: 23.5vw;
+    background-color: rgb(0, 132, 255);
+    color: white;
+    height: 3.7vh;
+    border-radius: 7px;
+}
+
+.valid_button {
+    display: none;
+}
+
+.content__page {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.unvisible {
+    display: none;
+}
+
+#animals-container {
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.animal_item {
+    border: 1px solid gray;
+    width: 14vw;
+    height: 37vh;
+    background-color: rgb(236, 236, 236);
+    margin-top: 3vh;
+}
+
+h4 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1vw;
+}
+
+.animal_item__item {
+    margin-top: 1vh;
+}
+
+.animal_item__item > p {
+    margin-top: 0.7vh;
+}
+
+.edit_button__wrapper {
+    margin-top: 2.5vh;
+    display: flex;
+}
+
+.edit_button{
+    width: 5vw;
+    height: 3vh;
+    background-color: rgb(76, 196, 252);
+    color: white;
+    border-radius: 4px;
+}
+
+.remove_button{
+    width: 5vw;
+    height: 3vh;
+    background-color: rgb(252, 76, 76);
+    color: white;
+    border-radius: 4px;
+    margin-left: 4px;
+}
+
+.animal_item__img {
+    height: 40%;
+    width: 100%;
+}
+
+.animal_item__container {
+    padding-left: 11px;
+}
+
+#alert__block {
+    height: 6vh;
+    padding: 0 20px;
+    width: 42vw;
+    border: 2px solid black;
+    margin: 3vh auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 210, 210, 0.773);
+    border-radius: 7px;
+    border: 1px solid red;
+    animation-name: valid-eror;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+}
+
+@keyframes valid-eror {
+    0% {    
+        border-radius: 1px;
+    }
+    50% {
+        border-radius: 50%;
+    }
+    100% {
+        border-radius: 7px;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.alert__block {
+    display: none;
+}
+
+.alert__img {
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+}
+
+p > span {
+    color: red;
+    font-weight: 700;
+}
+
+.alert__text {
+    font-weight: 400;
+    color: rgb(204, 133, 133);
+}
